@@ -1,29 +1,59 @@
-const Post = require("../models/Post");
-const { sequelizeToObject } = require("../../util/sequelize");
+const { Post, Category, Tag } = require('../models');
+const { sequelizeToObject, multipleSequelizeToObject } = require("../../util/sequelize");
+const e = require('express');
 
 class PostsController {
-  create(req, res) {
-    res.render("posts/create");
-  }
+  async create(req, res, next) {
+        try {
+            // Lấy tất cả categories và tags từ database
+            const categories = await Category.findAll();
+            const tags = await Tag.findAll();
 
-  async store(req, res) {
-    try {
-      await Post.create({
-        title: req.body.title,
-        slug: req.body.slug,
-        featuredImage: req.body.featuredImage,
-        content: req.body.content,
-      });
-      res.redirect("/");
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Lỗi khi tạo bài viết");
+            // Render view và truyền dữ liệu qua
+            res.render('posts/create', {
+                categories: multipleSequelizeToObject(categories),
+                tags: multipleSequelizeToObject(tags)
+            });
+        } catch (error) {
+            next(error);
+        }
     }
-  }
+
+  async store(req, res, next) {
+        try {
+            // Dữ liệu từ form
+            const { title, categoryId, featuredImage, content, tagIds } = req.body;
+
+            // 1. Tạo bài viết mới
+            const newPost = await Post.create({
+                title,
+                featuredImage,
+                excerpt,
+                content,
+                categoryId: categoryId || null, // Nếu không chọn category thì giá trị là null
+            });
+
+            if (tagIds && tagIds.length > 0) {
+                await newPost.setTags(tagIds);
+            }
+
+            // 3. Chuyển hướng về trang chủ
+            res.redirect('/');
+
+        } catch (error) {
+            next(error);
+        }
+    }
 
   async show(req, res, next) {
     try {
-      const post = await Post.findOne({ where: { slug: req.params.slug } });
+      const post = await Post.findOne({
+            where: { slug: req.params.slug },
+            include: [ // Lấy thêm dữ liệu từ các bảng liên quan
+                { model: Category, as: 'category' },
+                { model: Tag, as: 'tags' }
+            ]
+        });
       if (post) {
         res.render("posts/show", { post: sequelizeToObject(post) });
       } else {
