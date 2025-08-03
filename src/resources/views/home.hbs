@@ -1,25 +1,33 @@
 <div class="mt-4">
-    <h1>Bài viết mới nhất</h1>
-    <div class="row">
-        {{#if posts}}
-            {{#each posts}}
-                <div class="col-sm-6 col-lg-4 mt-4">
-                    <div class="card h-100">
-                        <a href="/news/{{this.slug}}">
-                            <img src="{{this.featuredImage}}" class="card-img-top" alt="{{this.title}}">
-                        </a>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">
-                                <a href="/news/{{this.slug}}" class="text-dark">{{this.title}}</a>
-                            </h5>
-                            <p class="card-text">{{this.content}}</p>
-                            <a href="/news/{{this.slug}}" class="btn btn-primary mt-auto">Đọc thêm</a>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-        {{else}}
-            <p class="text-center col-12">Chưa có bài viết nào được xuất bản.</p>
-        {{/if}}
-    </div>
+  <h1>Bài viết mới nhất</h1>
+  <div class="row">
+    {{#if posts}}
+      {{#each posts}}
+        <div class="col-sm-6 col-lg-4 mt-4">
+          <div class="card h-100">
+            <a href="/posts/{{this.slug}}">
+              <img
+                src="{{this.featuredImage}}"
+                class="card-img-top"
+                alt="{{this.title}}"
+              />
+            </a>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">
+                <a
+                  href="/posts/{{this.slug}}"
+                  class="text-dark"
+                >{{this.title}}</a>
+              </h5>
+              <p class="card-text">{{this.content}}</p>
+              <a href="/posts/{{this.slug}}" class="btn btn-primary mt-auto">Đọc
+                thêm</a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <p class="text-center col-12">Chưa có bài viết nào được xuất bản.</p>
+    {{/if}}
+  </div>
 </div>

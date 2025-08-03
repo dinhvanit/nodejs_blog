@@ -1,0 +1,40 @@
+
+.article-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+
+    h2, h3, h4 {
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+
+    p {
+        margin-bottom: 1em;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin: 1em 0;
+    }
+
+    blockquote {
+        border-left: 4px solid #ccc;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #666;
+    }
+
+    code {
+        background-color: #f5f5f5;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+    }
+    
+    pre code {
+        display: block;
+        padding: 1rem;
+    }
+}

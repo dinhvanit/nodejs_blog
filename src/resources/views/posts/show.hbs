@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+
+            {{#if post}}
+                <article>
+                    <header class="mb-4">
+                        <h1 class="fw-bolder mb-1">{{post.title}}</h1>
+                        
+                        {{!-- Thông tin meta: Ngày đăng, tác giả... --}}
+                        <div class="text-muted fst-italic mb-2">
+                            Đăng vào ngày {{formatDate post.createdAt}}
+                        </div>
+                        
+                    </header>
+
+                    {{#if post.featuredImage}}
+                        <figure class="mb-4">
+                            <img class="img-fluid rounded" src="{{post.featuredImage}}" alt="{{post.title}}">
+                        </figure>
+                    {{/if}}
+
+                    <section class="mb-5 article-content">
+                        {{{post.content}}}
+                    </section>
+                </article>
+
+                <hr>
+
+                <section class="mb-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Bình luận</h5>
+                            <p>Tính năng bình luận đang được phát triển.</p>
+                        </div>
+                    </div>
+                </section>
+            
+            {{else}}
+                <div class="text-center">
+                    <h2>404 - Không tìm thấy bài viết</h2>
+                    <p>Bài viết bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p>
+                    <a href="/" class="btn btn-primary">Quay về trang chủ</a>
+                </div>
+            {{/if}}
+
+        </div>
+    </div>
+</div>

@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const newsController = require('../app/controllers/NewsControllers');
 
-router.use('/:slug', newsController.show);
+// Route tĩnh đặt trước
+router.get('/', newsController.index);
 
-router.use('/', newsController.index);
+// Route động đặt sau
+router.get('/:slug', newsController.show);
 
 module.exports = router;

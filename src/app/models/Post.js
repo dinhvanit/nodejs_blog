@@ -12,4 +12,5 @@ const Post = sequelize.define('Post', {
     tableName: 'posts', // Bắt buộc Sequelize dùng đúng tên bảng 'posts'
 });
 
+
 module.exports = Post;
