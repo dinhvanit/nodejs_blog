@@ -26,14 +26,10 @@
   </div>
 
   <div class="form-group">
-    <label for="content">Nội dung</label>
-    <textarea
-      class="form-control"
-      id="content"
-      name="content"
-      rows="6"
-    ></textarea>
-  </div>
+        <label for="content-editor">Nội dung</label>
+
+        <textarea id="content-editor" name="content"></textarea>
+    </div>
 
   <div class="form-group">
     <label for="excerpt">Tóm tắt (Excerpt)</label>
@@ -68,4 +64,16 @@
   </div>
 
   <button type="submit" class="btn btn-success">Đăng bài</button>
+  <script src="https://cdn.tiny.cloud/1/{{TINYMCE_API_KEY}}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+      tinymce.init({
+        selector: 'textarea#content-editor', // Chọn textarea có id là 'content-editor'
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        height: 500, // Chiều cao của trình soạn thảo
+        // (Tùy chọn) Cấu hình để upload ảnh (sẽ cần xử lý ở server)
+        // images_upload_url: '/upload-image',
+        // images_upload_handler: (blobInfo, progress) => new Promise(...)
+      });
+    </script>
 </form>

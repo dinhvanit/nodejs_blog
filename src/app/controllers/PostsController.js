@@ -12,7 +12,8 @@ class PostsController {
             // Render view và truyền dữ liệu qua
             res.render('posts/create', {
                 categories: multipleSequelizeToObject(categories),
-                tags: multipleSequelizeToObject(tags)
+                tags: multipleSequelizeToObject(tags),
+                TINYMCE_API_KEY: process.env.TINYMCE_API_KEY
             });
         } catch (error) {
             next(error);
@@ -22,7 +23,7 @@ class PostsController {
   async store(req, res, next) {
         try {
             // Dữ liệu từ form
-            const { title, categoryId, featuredImage, content, tagIds } = req.body;
+            const { title, categoryId, featuredImage, content,excerpt, tagIds } = req.body;
 
             // 1. Tạo bài viết mới
             const newPost = await Post.create({
