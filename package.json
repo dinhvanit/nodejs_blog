@@ -34,8 +34,11 @@
     }
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "express-handlebars": "^8.0.3"
+    "express-handlebars": "^8.0.3",
+    "mysql2": "^3.14.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "husky": "^9.1.7",

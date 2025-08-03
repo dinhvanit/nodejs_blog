@@ -1,12 +1,14 @@
-class SiteController {
-    // [GET] /
-    index(req, res) {
-        res.render('home');
-    }
+const Post = require('../models/Post');
 
-    // [GET] /search
-    search(req, res) {
-        res.render('search');
+class SiteController {
+    async index(req, res) {
+        try {
+            const posts = await Post.findAll(); // nếu dùng Sequelize
+            res.render('home', { posts: posts.map(p => p.toJSON()) });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Lỗi server');
+        }
     }
 }
 
