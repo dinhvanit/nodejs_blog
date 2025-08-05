@@ -1,9 +1,10 @@
-
 .article-content {
     line-height: 1.8;
     font-size: 1.1rem;
 
-    h2, h3, h4 {
+    h2,
+    h3,
+    h4 {
         margin-top: 1.5em;
         margin-bottom: 0.5em;
     }
@@ -32,7 +33,7 @@
         border-radius: 3px;
         font-family: monospace;
     }
-    
+
     pre code {
         display: block;
         padding: 1rem;

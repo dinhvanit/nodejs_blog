@@ -15,12 +15,12 @@ Post.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 Post.belongsToMany(Tag, {
     through: PostTag, // Sử dụng model bảng trung gian
     foreignKey: 'postId',
-    as: 'tags'
+    as: 'tags',
 });
 Tag.belongsToMany(Post, {
     through: PostTag, // Sử dụng model bảng trung gian
     foreignKey: 'tagId',
-    as: 'posts'
+    as: 'posts',
 });
 
 // Tạo một đối tượng db để export tất cả
