@@ -6,6 +6,8 @@ const Category = require('./Category');
 const Tag = require('./Tag');
 const PostTag = require('./PostTag'); // Import cả model bảng trung gian
 
+ const User = require('./User');
+
 // Định nghĩa các mối quan hệ ở đây
 // 1. Quan hệ Category - Post (Một-Nhiều)
 Category.hasMany(Post, { foreignKey: 'categoryId', as: 'posts' });
@@ -23,6 +25,9 @@ Tag.belongsToMany(Post, {
     as: 'posts',
 });
 
+User.hasMany(Post, { foreignKey: 'userId', as: 'posts' });
+Post.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
 // Tạo một đối tượng db để export tất cả
 const db = {};
 db.sequelize = sequelize;
@@ -30,5 +35,5 @@ db.Post = Post;
 db.Category = Category;
 db.Tag = Tag;
 db.PostTag = PostTag;
-
+db.User = User;
 module.exports = db;

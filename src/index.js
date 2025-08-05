@@ -3,7 +3,13 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+
 require('dotenv').config();
+
+require('./config/passport')(passport);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +24,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(methodOverride('_method'));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET ,
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error'); // Dùng cho lỗi của passport
+    res.locals.user = req.user || null; // Lưu thông tin user nếu đã đăng nhập
+    next();
+});
 
 // HTTP logger
 app.use(morgan('combined'));
